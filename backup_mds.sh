@@ -1,4 +1,4 @@
-#!/bin/bash -f
+#!/bin/bash
 source /opt/CPshrd-R77/tmp/.CPprofile.sh
 
 #Including enviroment system variables
@@ -21,7 +21,7 @@ mds_start
 
 #Gzip all need files
 now=$(date +"%m_%d_%Y")
-tar -cvzf backup_SD_MDS_$now.tar.gz mds_restore gzip gtar *.mdsbk.tgz
+tar -cvf backup_MDS_$now.tar mds_restore gzip gtar *.mdsbk.tgz
 
 #Moving the Gzip file to the ftp server
 HOST=ip
@@ -30,8 +30,10 @@ PASS=password
 
 ftp -inv $HOST<<FINFTP
        user $USER $PASS
-       put backup_SD_MDS_$now.tar.gz
+       put backup_MDS_$now.tar
        bye
 FINFTP
 
+#Remove the TARed file
+rm backup_MDS_$now.tar
 #FIN
