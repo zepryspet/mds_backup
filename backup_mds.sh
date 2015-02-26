@@ -16,10 +16,7 @@ rm gzip
 #Creating the backup files, stopping processes, without saving logs and without asking
 mds_backup -b -l -s
 
-#Starting MDS services
-mds_start
-
-#Gzip all need files
+#TARing all need files
 now=$(date +"%m_%d_%Y")
 tar -cvf backup_MDS_$now.tar mds_restore gzip gtar *.mdsbk.tgz
 
@@ -36,4 +33,8 @@ FINFTP
 
 #Remove the TARed file
 rm backup_MDS_$now.tar
+
+#Starting MDS services, patched as stated by sk101903
+mds_start -s
+
 #FIN
