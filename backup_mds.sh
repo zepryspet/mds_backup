@@ -17,7 +17,7 @@ rm gzip
 mds_backup -b -l -s
 
 #TARing all need files
-now=$(date +"%m_%d_%Y")
+now=$(date +"%d-%b-%Y")
 tar -cvf backup_MDS_$now.tar mds_restore gzip gtar *.mdsbk.tgz
 
 #Moving the Gzip file to the ftp server
